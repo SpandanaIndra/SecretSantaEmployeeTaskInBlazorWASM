@@ -1,0 +1,10 @@
+﻿@page "/send-email"
+@inject HttpClient HttpClient
+
+<h3>Email Component</h3>
+<button @onclick="SendMail" class="btn btn-primary">Send Email</button>
+
+@if (result != null)
+{
+    <h3>@result</h3>
+}

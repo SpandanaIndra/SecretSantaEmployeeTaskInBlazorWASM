@@ -1,0 +1,30 @@
+﻿@page "/fetchdata"
+
+<h3>Employee Details</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>EntityName</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Department</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Employees)
+        {
+            <tr>
+                <td>@employee.Id</td>
+                <td>@employee.EntityName</td>
+                <td>@employee.Name</td>
+                <td>@employee.Email</td>
+                <td>@employee.Department</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@code{
+    [Parameter]
+    public List<Employee> Employees { get; set; }
+}
