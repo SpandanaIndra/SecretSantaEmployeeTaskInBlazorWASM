@@ -1,10 +1,9 @@
 ﻿@page "/send-email"
 @inject HttpClient HttpClient
 
-<h3>Email Component</h3>
-<button @onclick="SendMail" class="btn btn-primary">Send Email</button>
-<button @onclick="RetriveData" class="btn btn-primary">Retrieve Data</button>
-<button @onclick="ConfirmAndSendEmails" class="btn btn-primary">SecretSanta</button>
+<h3 style="color:red">Secret Santa</h3><br /><br />
+@*<button @onclick="SendMail" class="btn btn-secondary">Single Email</button><br />
+*@<button @onclick="ConfirmAndSendEmails" style="width:60%" class="btn btn-primary form-control">Send Emails</button>
 
 
 @if (result != null)

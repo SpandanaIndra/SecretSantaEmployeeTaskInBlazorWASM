@@ -78,12 +78,11 @@ namespace EmployeeTaskInBlazorWASM.Client.Pages
         {
             try
             {
-                List<string> names = await HttpClient.GetFromJsonAsync<List<string>>("api/Email/readnameColumn");
-                List<string> emails = await HttpClient.GetFromJsonAsync<List<string>>("api/Email/reademailColumn");
+                List<Employee> employees = await HttpClient.GetFromJsonAsync<List<Employee>>("api/Employee/read");
 
-                if (emails.Count != names.Count)
+                if (employees == null || employees.Count == 0)
                 {
-                    result1 = "Number of recipients does not match the number of bodies!";
+                    result1 = "Error: No employee data retrieved.";
                     return;
                 }
 
@@ -91,38 +90,25 @@ namespace EmployeeTaskInBlazorWASM.Client.Pages
                 SecretSantaData secretSantaData = new SecretSantaData();
                 secretSantaData.SecretSantaPairing = new Dictionary<string, string>(); // Initialize the dictionary
 
-                List<string> shuffledNames = new List<string>(names.Distinct());
-
-                // Shuffle names using Fisher-Yates algorithm
-                int n = shuffledNames.Count;
+                // Fisher-Yates shuffle algorithm
+                int n = employees.Count;
                 while (n > 1)
                 {
                     n--;
                     int k = random.Next(n + 1);
-                    string value = shuffledNames[k];
-                    shuffledNames[k] = shuffledNames[n];
-                    shuffledNames[n] = value;
+                    Employee value = employees[k];
+                    employees[k] = employees[n];
+                    employees[n] = value;
                 }
 
-                for (int i = 0; i < emails.Count; i++)
+                for (int i = 0; i < employees.Count; i++)
                 {
-                    string email = emails[i];
-                    string shuffledName = shuffledNames[i % shuffledNames.Count];
-
-                    // Check if the email already exists in the dictionary
-                    while (secretSantaData.SecretSantaPairing.ContainsKey(email))
-                    {
-                        shuffledName = shuffledNames[random.Next(shuffledNames.Count)];
-                    }
-
-                    secretSantaData.SecretSantaPairing[email] = shuffledName;
+                    secretSantaData.SecretSantaPairing[employees[i].Email] = employees[(i + 1) % employees.Count].Name;
                 }
 
-                // Serialize the dictionary to JSON before sending
+                // Example: Serializing and sending the data
                 string jsonContent = JsonConvert.SerializeObject(secretSantaData);
-
                 HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
                 HttpResponseMessage response = await HttpClient.PostAsync("api/Email/sendSecretSantaPairs", content);
 
                 if (response.IsSuccessStatusCode)
@@ -154,6 +140,7 @@ namespace EmployeeTaskInBlazorWASM.Client.Pages
                 Console.WriteLine($"Exception: {ex.Message}");
                 result = "Error: Unknown exception occurred.";
             }
+
         }
     }
 }
