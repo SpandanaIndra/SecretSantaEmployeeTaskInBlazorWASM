@@ -123,7 +123,7 @@ namespace EmployeeTaskInBlazorWASM.Server.Controllers
 
                 using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                 {
-                    smtp.Credentials = new System.Net.NetworkCredential("spandanareddy999@gmail.com", "bjsifiljsxrfhzpq");
+                    smtp.Credentials = new System.Net.NetworkCredential("spandanareddy999@gmail.com", "123");
                     smtp.EnableSsl = true;
 
                     foreach (var kvp in secretSantaData.SecretSantaPairing)
