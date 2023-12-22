@@ -27,7 +27,7 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-   <script>
+  <!-- <script>
         window.saveAsFile = function (filename, content) {
             console.log('saveAsFile function called');
 
@@ -41,6 +41,11 @@
 
         }
 
+    </script>-->
+    <script>
+        window.showConfirmation = function (message) {
+            return confirm(message);
+        };
     </script>
     <script src="_framework/blazor.webassembly.js"></script>
 </body>

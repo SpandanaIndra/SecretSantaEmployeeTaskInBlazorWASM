@@ -3,8 +3,15 @@
 
 <h3>Email Component</h3>
 <button @onclick="SendMail" class="btn btn-primary">Send Email</button>
+<button @onclick="RetriveData" class="btn btn-primary">Retrieve Data</button>
+<button @onclick="ConfirmAndSendEmails" class="btn btn-primary">SecretSanta</button>
+
 
 @if (result != null)
 {
     <h3>@result</h3>
+}
+@if (result1 != null)
+{
+    <h3>@result1</h3>
 }

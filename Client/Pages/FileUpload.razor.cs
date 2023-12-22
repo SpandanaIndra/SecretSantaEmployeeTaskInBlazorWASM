@@ -80,7 +80,7 @@ namespace EmployeeTaskInBlazorWASM.Client.Pages
                 byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonData);*/
                 try
                 {
-                   await JSRun.InvokeVoidAsync("saveAsFile", "data.json", jsonData);
+                   //await JSRun.InvokeVoidAsync("saveAsFile", "data.json", jsonData);
                    await SaveJsonDataToServer();
                 }
                 catch (Exception ex)
